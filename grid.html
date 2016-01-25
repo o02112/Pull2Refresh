@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<title>Pull to Refresh</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript" src="js/iscroll-probe.js"></script>
+		<script type="text/javascript" src="js/pullfresh.js"></script>
+	</head>
+	<body>
+		<div id="goods-list-box">
+			<ul id="goods-list"></ul>
+		</div>
+		
+	<script>
+		$('#goods-list-box').pFresh({
+			
+			// Default options will be used if was not set
+			
+			// Request ( POST )
+			rUrl : 'data.php', // Request URL, default: #
+			rParam : {'key' : 'iPhone 6s', 'va' : '2000'}, // Request param, default {}
+			rCallBack : apd, // Callback function, default: function(){ return true; }
+			// rDataType : 'json', // Response data format ( default )
+			
+			// Control tips
+			// txt2Fresh : 'Release to refresh', // ( default )
+			// txtLoading : 'Loading...', // ( default )
+			// txtLoaded : 'Complete!', // ( default )
+			// txtLoadMore	: 'Pull up to load more', // ( default )
+			
+			// offsetH : 60, // Height of Pull distance in pixes ( default )
+			// bottomH : 30, // Height of the list bottom space, the 'tips'  ( default )
+			
+		}).updateList(); // Begin load data when entre the page, prevent the page was blank
+		
+		function apd(data){
+			var html = '';
+			for(i=0; i<data.plist.length; i++){
+				html += 
+				'<li class="goods-list-item">'+
+					'<a href="#"><img src="'+data.plist[i]['img']+'" onerror="javascript:this.src=\'images/img.png\'" /></a>'+
+					'<p class="goods-name-box">'+
+						'<span class="goods-name">'+data.plist[i]['title']+'</span>'+
+						'<span class="goods-seller">Taged</span>'+
+					'</p>'+
+					'<p class="goods-price-box">'+
+						'<span class="goods-price-fen-num numeric">'+data.plist[i]['price']+'</span>分'+
+					'</p>'+
+				'</li>';
+			}
+			
+			$('#goods-list-box ul').append(html);
+		}
+		
+		</script>
+	</body>
+</html>
