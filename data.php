@@ -6,6 +6,6 @@
 	$arr['plist'][] = array('title'=>$_POST['key'], 'price'=>$_POST['va'], 'img'=>'images/img.png');
 	$arr['plist'][] = array('title'=>'product name3', 'price'=>13.0, 'img'=>'images/img.png');
 	
-	sleep(2);
+	sleep(1);
 	echo json_encode($arr);
 ?>

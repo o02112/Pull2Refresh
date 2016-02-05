@@ -17,46 +17,48 @@
 		</div>
 		
 	<script>
-		$('#goods-list-box').pFresh({
+		var a = $('#goods-list-box').pFresh({
+			// 默认值不设置则保持不变
 			
-			// Default options will be used if was not set
+			// 请求 （POST请求）
+			rUrl : 'data.php', // 请求数据地址，默认： #
+			rParam : {'key' : 'iPhone 6s', 'va' : '2000'}, // 请求参数，默认：{}
+			rCallback : apd, // 请求完成的回调函数，默认：function(){ return true; }
+			// rDataType : 'json', // 返回数据格式（默认值）
 			
-			// Request ( POST )
-			rUrl : 'data.php', // Request URL, default: #
-			rParam : {'key' : 'iPhone 6s', 'va' : '2000'}, // Request param, default {}
-			rCallBack : apd, // Callback function, default: function(){ return true; }
-			// rDataType : 'json', // Response data format ( default )
+			// 操作提示
+			// txt2Fresh : '松开刷新', // （默认值）
+			// txtLoading : '正在加载...', // （默认值）
+			// txtLoaded : '加载完毕！', // （默认值）
+			// txtLoadMore	: '上拉加载更多', // （默认值）
 			
-			// Control tips
-			// txt2Fresh : 'Release to refresh', // ( default )
-			// txtLoading : 'Loading...', // ( default )
-			// txtLoaded : 'Complete!', // ( default )
-			// txtLoadMore	: 'Pull up to load more', // ( default )
+			// offsetH : 60, // 上拉高度，触发刷新（默认值）
+			// bottomH : 30, // 底部空隙高度，提示文字空间；列表底部距浏览器窗口的下边距（默认值）
 			
-			// offsetH : 60, // Height of Pull distance in pixes ( default )
-			// bottomH : 30, // Height of the list bottom space, the 'tips'  ( default )
-			
-		}).updateList(); // Begin load data when entre the page, prevent the page was blank
+		}).updateList(); // 进入页面主动刷新数据，避免页面空白
 		
 		function apd(data){
+
 			var html = '';
 			for(i=0; i<data.plist.length; i++){
 				html += 
 				'<li class="goods-list-item">'+
-					'<a href="#"><img src="'+data.plist[i]['img']+'" onerror="javascript:this.src=\'images/img.png\'" /></a>'+
+					'<a href="../goods_detail/shop/pages/goods-detail.html"><img src="'+data.plist[i]['img']+'" '+
+					'onerror="javascript:this.src=\'images/fen.png\'" '+
+					'/></a>'+
 					'<p class="goods-name-box">'+
 						'<span class="goods-name">'+data.plist[i]['title']+'</span>'+
 						'<span class="goods-seller">Taged</span>'+
 					'</p>'+
+					'<p><del style="color:#aaa; font-size:1em;">2342</del></p>'+
 					'<p class="goods-price-box">'+
-						'<span class="goods-price-fen-num numeric">'+data.plist[i]['price']+'</span>'+
+						'<span class="goods-price-fen-num numeric">'+data.plist[i]['price']+'</span>score'+
 					'</p>'+
 				'</li>';
 			}
 			
 			$('#goods-list-box ul').append(html);
 		}
-		
 		</script>
 	</body>
 </html>
